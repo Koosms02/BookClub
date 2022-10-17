@@ -1,0 +1,22 @@
+{
+  "cli": {
+    "version": ">= 2.1.0"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "env": {
+        "ENVIRONMENT": "dev",
+        "RCT_METRO_PORT": "19000"
+      }
+    },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {}
+  },
+  "submit": {
+    "production": {}
+  }
+}

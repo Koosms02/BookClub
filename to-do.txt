@@ -1,0 +1,11 @@
+//fix the problem of increasing the list unneccesary
+
+-after a certain time show ads
+-after a certain clicks show 10 clicks shows interstital ads 
+-after 20 into the application show the rewarded ads
+
+power of positive thinking 
+the magic of thinking big
+
+
+Integer.parseInt(findProperty('android.compileSdkVersion') ?: '31')
