@@ -9,3 +9,45 @@ the magic of thinking big
 
 
 Integer.parseInt(findProperty('android.compileSdkVersion') ?: '31')
+
+Two problems occurs during the eas build
+    -SDK location is not found
+    -SoftwareComponentInternal
+
+    compileSdkVersion is not  specified , please add it ot the build.gradle
+        specify the version of compileSdkVersion
+    should update the eas-cli to the latest versioncd 
+
+       android:value="${appJSONGoogleMobileAdsDelayAppMeasurementInit}"
+
+working of the onbording screens
+saving dark /light mode to storage 
+saving pos to memmory,each and every category should have its own value
+splash screen screen 
+and test if the onbording screen works
+
+structure inside firebase
+    Chapter1
+        Title:[
+          "Author"
+          "Title"
+        ]
+        Lesson:[
+            point 1,
+            point 2,
+            point 3,
+        ]
+        Summary:[
+            point1 ,
+            point2,
+            point3
+        ]
+
+
+SHould add the key the structure of my list
+
+
+-first thing to fix
+    advertising an affiliates 
+    ads problem 
+    Only the two remaining things

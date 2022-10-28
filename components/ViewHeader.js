@@ -22,7 +22,7 @@ const ViewHeader = ({heading}) => {
   }
   return (
 
-    <View  style={{width:'90%' ,backgroundColor:'white' , height:50,borderRadius:20 , flexDirection:'row' ,alignItems:'center',paddingLeft:15, justifyContent:'flex-start'}}>
+    <View style={{width:'90%' ,backgroundColor:'white' , height:50,borderRadius:20 , flexDirection:'row' ,alignItems:'center',paddingLeft:15, justifyContent:'flex-start'}}>
             <TouchableOpacity 
                 onPress={
                     ()=>{

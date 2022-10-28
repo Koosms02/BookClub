@@ -1,17 +1,21 @@
 
 import { NavigationContainer } from '@react-navigation/native';
-import { DataProvider } from './Api/DataProvider';
+import { useCallback } from 'react';
+
 import StackNavigation from './Route/StackNavigation';
 
 
-export default function App() {
 
+
+
+  export default function App() {
+ 
   return (
-    <DataProvider>
+    
       <NavigationContainer>
         <StackNavigation/>
       </NavigationContainer>
-    </DataProvider>
+    
   );
 }
 

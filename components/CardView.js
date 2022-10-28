@@ -1,19 +1,16 @@
 import { View, Text, TouchableOpacity, ScrollView, FlatList, Modal, Button } from 'react-native'
 import React from 'react'
-import { Foundation, MaterialIcons , Ionicons } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 import { useFonts } from 'expo-font/build/FontHooks'
-import { statusBarHeight, width ,height } from '../assets/constants/parameter'
-import { useNavigation, useRoute } from '@react-navigation/native'
-import * as Speech from 'expo-speech'
+import {  width ,height } from '../assets/constants/parameter'
 
-const CardView = ({dark , setDark , ideaContent , HowToContent ,setHowTo ,setConcept}) => {
 
-    const navigation = useNavigation()
-    const route = useRoute()
-    const header= route.params.header
 
-    // const [dark, setDark] = React.useState(true)   //should be store in the memory
-   
+
+
+const CardView = ({dark , setDark , ideaContent }) => {
+
+
     const [fontLoading] = useFonts({
       "FormaRegular": require('../assets/constants/Font/FormaRegular.ttf'),
       "MoonLight":require('../assets/constants/Font/MoonLight.otf'),
@@ -27,33 +24,21 @@ const CardView = ({dark , setDark , ideaContent , HowToContent ,setHowTo ,setCon
     
 
   return (
-    <View>
+    <View style={{width:width , height:height}}>
 
-        {/* name of the book and author name */}
-       
-
-        {/* idea card */}
-
-         <View style={dark === true ?({width:width*0.9 , height:height*0.35 ,backgroundColor:'black' , borderRadius:20 , marginTop:20}):({width:width*0.9 , height:height*0.35 ,backgroundColor:'white' , borderRadius:20 , marginTop:20})}>
+        <View style={dark === true ?({width:width*0.9 , height:height*0.78,backgroundColor:'black' , borderRadius:20 , marginTop:20}):({width:width*0.9 , height:height*0.78  ,backgroundColor:'white' , borderRadius:20 , marginTop:20})}>
                 
             {/* The topic  */}
-            <View style={{padding:10,flexDirection:'row' , width:'100%', backgroundColor:'white' , justifyContent:'space-between', borderTopRightRadius:20 ,  borderTopLeftRadius:20}}>
+            <View style={{padding:10,flexDirection:'row' , width:'100%',height:70, backgroundColor:'white' , justifyContent:'space-between', borderTopRightRadius:20 ,  borderTopLeftRadius:20}}>
                 <View 
-                numberOfLines={1}
-                adjustsFontSizeToFit={true}
-                style={{   width:'80%', padding:10 ,  alignItems:'center' , justifyContent:'center'  }}>
-                        <Text style={{fontFamily:'MoonBold' ,  fontSize:10}}>{ideaContent[0]} </Text>
+                    style={{ width:'90%', justifyContent:'center' , height:'100%' }}>
+                        <ScrollView contentContainerStyle={{alignItems:'center'}} horizontal={true}>
+                            <Text numberOfLines={1} style={{fontWeight:"bold", fontSize:18}}>{ideaContent[0]} </Text>
+                        </ScrollView>
                 </View>
-                {/* <View style={{flexDirection:'row' , height:'100%' , width:'23%', justifyContent:'flex-end',paddingRight:15}}>
-                    <TouchableOpacity 
-                    style={{justifyContent:'center'}}
-                    onPress={()=>{
-                        setConcept(true)
-                    }}>
-                            <MaterialIcons name="fullscreen" size={30}/>
-                    </TouchableOpacity>
-                </View> */}
-                <TouchableOpacity onPress={() =>{
+                <TouchableOpacity
+                style={{width:'10%' , height:'100%' , justifyContent:'center'}}
+                onPress={() =>{
                     if(dark === false){
                         setDark(true)
                     }else{
@@ -74,51 +59,18 @@ const CardView = ({dark , setDark , ideaContent , HowToContent ,setHowTo ,setCon
             {/* Contents of the topic */}
            <FlatList
             data={ideaContent}
+            showsVerticalScrollIndicator={false}
+            initialNumToRender={4}
             renderItem={({item , index})=>(
-                <View style={{paddingLeft:10}}>
-                    {dark === true?(index !== 0 ?(<Text style={{color:'white'}}>{item}</Text>):(<Text></Text>)):(index!==0?(<Text style={{color:'black'}}>{item}</Text>):(<Text></Text>))}
+                <View style={{paddingLeft:10 , paddingBottom:8 , paddingRight:10 ,flexDirection:'row' , alignItems:'center'}}>
+                    {/* {dark === true?(index !== 0 ?(<View style={{backgroundColor:'white' , height:'40%' , width:'2%' ,borderRadius:50 ,paddingLeft:10 , marginRight:10 , marginTop:8}}></View>):(<Text></Text>)):(index!==0?(<View style={{backgroundColor:'black' , height:'40%' , width:'2%' ,borderRadius:50}}></View>):(<View></View>))} */}
+                    {dark === true?(index !== 0 ?(<Text style={{color:'white' , fontSize:18}}>{item}</Text>):(<Text></Text>)):(index!==0?(<Text style={{color:'black' , fontSize:18}}>{item}</Text>):(<Text></Text>))}
                 </View>
             )}
            />
             
-        </View>
-
-     {/* How to card*/}
-
-     <View style={dark === true ?({width:width*0.9 , height:height*0.30 ,backgroundColor:'black' , borderRadius:20 , marginTop:20}):({width:width*0.9 , height:height*0.30 ,backgroundColor:'white' , borderRadius:20 , marginTop:20})}>
-
-    {/* The topic  */}
-    <View style={{padding:10,flexDirection:'row' , width:'100%', backgroundColor:'white' ,  justifyContent:'space-between', borderTopRightRadius:20 ,  borderTopLeftRadius:20}}>
-        <View style={{   width:'100%', padding:10 ,  alignItems:'center' , justifyContent:'center'  }}>
-                <Text 
-                numberOfLines={1}
-                adjustsFontSizeToFit={true}
-                style={{fontFamily:'MoonBold' ,  fontSize:10}}>Apply the lesson </Text>
-        </View>
-        {/* <View style={{flexDirection:'row' , height:'100%' , width:'23%',  justifyContent:'flex-end',paddingRight:15}}>
-        <TouchableOpacity 
-        style={{justifyContent:'center'}}
-        onPress={()=>{
-                setHowTo(true)
-        }}>
-                <MaterialIcons name="fullscreen" size={30}/>
-        </TouchableOpacity>
-        </View> */}
-  </View>
-    {/* Contents of the topic */}
-    <FlatList
-            data={HowToContent}
-            renderItem={({item})=>(
-                <View style={{paddingLeft:10 , paddingTop:10}}>
-                   <Text style={dark===true?({color:'white'}):({color:'black'})}>{item}</Text>
-                </View>
-            )}
-           />
-       
-
-</View>
-
-
+      </View>
+      
     </View>
   )
 }

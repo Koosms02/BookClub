@@ -2,8 +2,6 @@
 import { View, Text } from 'react-native'
 import React, { createContext, useContext, useMemo ,useState} from 'react'
 import {doc , DocumentSnapshot, getDoc , getFirestore} from "firebase/firestore"
-// import {doc ,DocumentSnapshot , getDoc ,getFirestore } from "@react-native-firebase/firestore"
-// import firestore from "@react-native-firebase/firestore"
 import { db } from './Firebase/Firebase'
 import { LogBox } from 'react-native';
 
@@ -20,8 +18,10 @@ const DataContext = createContext({})
 
 export const  DataProvider = ({children}) => {
 
-  // React.useEffect(()=>console.log(doc1)
-  // ,[])
+  const [load , setLoad] = useState(false)
+  //check is the firebase is connected 
+  //check if the network connection is good
+  //
  
   const [Finance , setFinance] = useState()
   const [Communication , setCommunication] = useState()
@@ -108,11 +108,11 @@ export const  DataProvider = ({children}) => {
               val=>setFinance(val.data())).catch((error)=>setError(true))
               .finally(()=>setIsLoadedBusiness(true))
 
-            const docSnapCommunication = await getDoc(docRefCommunication).then(val=>setCommunication(val.data())).finally(()=>setIsLoadedCommunication(true))
-            const docSnapDiscipline = await getDoc(docRefDiscipline).then(val=>setDiscipline(val.data())).catch((error)=>setError(true)).finally(()=>setIsLoadedDiscipline(true))
-            const docSnapProductivity = await getDoc(docRefProductivity).then(val=>setProductivity(val.data())).catch((error)=>setError(true)).finally(()=>setIsLoadedProductivity(true))
-            const docSnapEducation = await getDoc(docRefEducation).then(val=>setEducation(val.data())).catch((error)=>setError(true)).finally(()=>setIsLoadedEducation(true))
-            const docSnapPsychology = await getDoc(docRefPsychology).then(val=>setPsychology(val.data())).catch((error)=>setError(true)).finally(()=>setIsLoadedPsychology(true))
+            // const docSnapCommunication = await getDoc(docRefCommunication).then(val=>setCommunication(val.data())).finally(()=>setIsLoadedCommunication(true))
+            // const docSnapDiscipline = await getDoc(docRefDiscipline).then(val=>setDiscipline(val.data())).catch((error)=>setError(true)).finally(()=>setIsLoadedDiscipline(true))
+            // const docSnapProductivity = await getDoc(docRefProductivity).then(val=>setProductivity(val.data())).catch((error)=>setError(true)).finally(()=>setIsLoadedProductivity(true))
+            // const docSnapEducation = await getDoc(docRefEducation).then(val=>setEducation(val.data())).catch((error)=>setError(true)).finally(()=>setIsLoadedEducation(true))
+            // const docSnapPsychology = await getDoc(docRefPsychology).then(val=>setPsychology(val.data())).catch((error)=>setError(true)).finally(()=>setIsLoadedPsychology(true))
 
             // didn't handle the error property correctly
      }
@@ -127,36 +127,34 @@ export const  DataProvider = ({children}) => {
 
 
   React.useEffect(()=>{
-    if(isLoadedBusiness &&  isLoadedCommunication &&  isLoadedEducation &&  isLoadedPsychology &&  isLoadedProductivity &&  isLoadedDiscipline){
-      StoreInArray(Finance ,F, setF)
-      StoreInArray(Communication ,C,setC)
-      StoreInArray(Discipline,D,setD)
-      StoreInArray(Education,E,setE)
-      StoreInArray(Psychology ,psy, setPsy)
-      StoreInArray(Productivity ,P, setP)
+    function store(){
+      if(isLoadedBusiness &&  isLoadedCommunication &&  isLoadedEducation &&  isLoadedPsychology &&  isLoadedProductivity &&  isLoadedDiscipline){
+        StoreInArray(Finance ,F, setF)  
+      }
 
     }
-    // console.log(Finance)
-  
-  },[allIsLoaded === true ,!error])
+    store()
 
-  const memoedValue = useMemo(()=>{
-    Finance , Communication , Discipline , Productivity , Education , Psychology , F , C ,D , P ,psy,E
+  },[allIsLoaded === true ,!error])
+  
+
+  //check if firebase is connected with no errors
+  React.useEffect(()=>{
+
   },[])
+
   return (
     <DataContext.Provider
         value={{
-            F , C ,D , P ,psy,E,
-            Finance ,Communication , Discipline , Productivity,Education,Psychology,
-            isLoadedBusiness ,
-            isLoadedCommunication ,
-            isLoadedDiscipline,
-            isLoadedEducation , 
-            isLoadedProductivity , 
-            isLoadedPsychology,
-            error,
+          F , C ,D , P ,psy,E,
+          isLoadedBusiness ,
+          isLoadedCommunication ,
+          isLoadedDiscipline,
+          isLoadedEducation , 
+          isLoadedProductivity , 
+          isLoadedPsychology,
+          error,load , setLoad
         }}
-
     >{children}</DataContext.Provider>
   )
 }

@@ -1,13 +1,13 @@
 {
   "expo":{
-    "name": "Bookclub",
+    "name": "BOOKCLUB",
     "slug": "Bookclub",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/ClubLogo.png",
+    "icon": "./assets/ICON2.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/GroupSplash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -22,13 +22,22 @@
     },
     "android": {
       "package": "com.dev.Bookclub",
+      "versionCode": 3,
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/foreground.png",
+        "backgroundColor": "#ffffff"
       },
-      
-      "config": {
+      "permissions": [
+        "READ_PHONE_STATE",
+        "READ_BASIC_PHONE_STATE"
+      ],
+      "blockedPermissions": [
+        "ACCESS_BACKGROUND_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION"
+      ],
+      "config":{
         "googleMobileAdsAppId": "ca-app-pub-9442935869713593~7941900437"
       }
     },
@@ -41,7 +50,7 @@
       }
     }
   },
-  "react-native-google-mobile-ads":{
-    "android_app_id":"ca-app-pub-9442935869713593~7941900437"
-  }
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-9442935869713593~7941900437"
+}
 }
